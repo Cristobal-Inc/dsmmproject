@@ -13,6 +13,8 @@ Products_dict = {'P01':['Carnival de Tapas',16], 'P02':['Fritura de Cangrejo',10
                 'P08':['Maduros Fritos', 7], 'P09':['Cigar del Pinar',8], 'P10':['Calamares', 10], 'P11':['Quesadillas',9], 'P12':['Tortilla Mambo',10],
                 'P13':['Queso de Cabra', 9], 'P14':['Ropa Vieja',8], 'P15':['Masas de Lechon Fritas', 12]}
 
+Table_numbers = {'T01' : 2, 'T02':2, 'T03':2, 'T04':2, 'T05':4, 'T06':4, 'T07':4, 'T08':4, 'T09':6, 'T10':6}
+
 def discountCheck():
     pass
 
