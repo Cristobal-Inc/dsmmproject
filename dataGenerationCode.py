@@ -13,7 +13,9 @@ Products_dict = {'P01':['Carnival de Tapas',16], 'P02':['Fritura de Cangrejo',10
                 'P08':['Maduros Fritos', 7], 'P09':['Cigar del Pinar',8], 'P10':['Calamares', 10], 'P11':['Quesadillas',9], 'P12':['Tortilla Mambo',10],
                 'P13':['Queso de Cabra', 9], 'P14':['Ropa Vieja',8], 'P15':['Masas de Lechon Fritas', 12]}
 
-Table_numbers = {'T01' : 2, 'T02':2, 'T03':2, 'T04':2, 'T05':4, 'T06':4, 'T07':4, 'T08':4, 'T09':6, 'T10':6}
+Table_numbers = {1 : ['T01','T02','T03','T04','T05','T06','T07','T08','T09','T10'], 2 : ['T01','T02','T03','T04','T05','T06','T07','T08','T09','T10']
+                 ,3 : ['T05','T06','T07','T08','T09','T10'] ,4 : ['T05','T06','T07','T08','T09','T10'], 
+                 5 :['T09','T10'], 6: ['T09','T10']}
 
 def discountCheck():
     pass
@@ -25,7 +27,7 @@ def price_calculator(x):
     return totalAmount
 
 def dataGenerator():
-    date_rng =  pd.date_range(start = '1/1/2017', end = '5/5/2019', freq = 'H')
+    date_rng =  pd.date_range(start = '1/1/2017', end = '5/5/2019', freq = 'min')
     dataFrame = pd.DataFrame(data = date_rng, columns = ['Date_Time'], index = date_rng)
     dataFrame = pd.DataFrame(data = dataFrame, index = date_rng).between_time('11:30', '23:30')
     dataFrame['Date of Arrival'] = [d.date() for d in dataFrame['Date_Time']]
@@ -38,8 +40,10 @@ def dataGenerator():
     #dataFrame['Discount(Boolean)'] = dataFrame['Day'].map(lambda x : rand.choice([True, False]))
     #dataFrame['Discount(Boolean)'].where 
     dataFrame['Group of People'] = dataFrame['Time of Arrival'].map(lambda x : rand.randint(1,6))
+    dataFrame['Table Number'] = dataFrame['Group of People'].map(lambda x : rand.choice(Table_numbers[x]))
     dataFrame['Items_Ordered'] = dataFrame['Group of People'].apply(lambda x : rand.sample(population=list(Products_dict.keys()), k=rand.randint(x,int(x)+4)))
     dataFrame['Total Amount'] = dataFrame['Items_Ordered'].map(lambda x:price_calculator(x) )
+    dataFrame.head(30)
     
 
     
